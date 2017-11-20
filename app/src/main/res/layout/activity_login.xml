@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bluredbg"
+    tools:context="com.finalproject.bidmeauction.LoginActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--ngubah warna toolbar-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:alpha="0.75"
+            android:background="@color/cardview_light_background"
+            app:theme="@style/ToolBarStyle" />
+
+        <TextView
+            android:id="@+id/rectangleBackground"
+            android:layout_width="280dp"
+            android:layout_height="330dp"
+            android:alpha=".70"
+            android:background="@drawable/rectangle_login"
+            app:layout_constraintBottom_toBottomOf="@+id/justtext"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <TextView
+            android:id="@+id/rectangle_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="52dp"
+            android:text="Log in To Start"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="0.833"
+            app:layout_constraintLeft_toLeftOf="@+id/rectangleBackground"
+            app:layout_constraintRight_toRightOf="@+id/rectangleBackground"
+            app:layout_constraintTop_toTopOf="@+id/rectangleBackground" />
+
+        <EditText
+            android:id="@+id/loginEmailField"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/input_outline"
+            android:drawableLeft="@drawable/email_fill"
+            android:drawablePadding="10dp"
+            android:hint="Email"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/rectangleBackground"
+            app:layout_constraintRight_toRightOf="@+id/rectangleBackground"
+            app:layout_constraintTop_toBottomOf="@+id/rectangle_title" />
+
+        <EditText
+            android:id="@+id/loginPasswordField"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/input_outline"
+            android:drawableLeft="@drawable/password_fill"
+            android:drawablePadding="10dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/rectangleBackground"
+            app:layout_constraintRight_toRightOf="@+id/rectangleBackground"
+            app:layout_constraintTop_toBottomOf="@+id/loginEmailField" />
+
+        <TextView
+            android:id="@+id/goToForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:text="Forgot Your Password?"
+            android:textSize="11sp"
+            app:layout_constraintLeft_toLeftOf="@+id/loginPasswordField"
+            app:layout_constraintTop_toBottomOf="@+id/loginPasswordField" />
+
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/submit_button"
+            android:text="Log In"
+            android:textColor="#ffffff"
+            app:layout_constraintLeft_toLeftOf="@+id/rectangleBackground"
+            app:layout_constraintRight_toRightOf="@+id/rectangleBackground"
+            app:layout_constraintTop_toBottomOf="@+id/loginPasswordField" />
+
+        <!--ganti jadi round -->
+        <Button
+           android:id="@+id/googleBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/google_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rectangleBackground"/>
+
+        <!--  namabah text view-->
+        <TextView
+            android:id="@+id/justtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Sign in With Google"
+            android:textColor="#fdfdfdfd"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/googleBtn" />
+
+
+        <!--<com.google.android.gms.common.SignInButton
+            android:id="@+id/googleBtn"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rectangleBackground"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"></com.google.android.gms.common.SignInButton>-->
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            app:layout_constraintTop_toBottomOf="@id/justtext"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/loginEmailField"
+            app:layout_constraintEnd_toStartOf="@+id/rectangle_title"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/rectangleBackground"
+            app:layout_constraintTop_toTopOf="@+id/rectangleBackground"
+            app:layout_constraintVertical_bias="0.511"
+            app:srcCompat="@mipmap/login_icon" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

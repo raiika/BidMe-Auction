@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.finalproject.bidmeauction">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <service android:name=".MyFirebaseMessagingService">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+        </intent-filter>
+    </service>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+        <activity android:name=".PostActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SetupActivity" />
+        <activity android:name=".BlogSingleActivity" />
+        <activity android:name=".BidActivity" />
+        <activity android:name=".UpcomingActivity" />
+        <activity android:name=".BookedActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".EditPostActivity" />
+        <activity android:name=".RegisterAdminActivity" />
+        <activity android:name=".PinActivity" />
+        <activity android:name=".SetupPinActivity" />
+        <activity android:name=".ExitActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".ForgotActivity" />
+        <activity android:name=".SettingsActivity"></activity>
+    </application>
+
+</manifest>

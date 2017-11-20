@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--item name="android:windowFullscreen">true</item--> <!-- FULLSCREEN -->
+    </style>
+
+    <style name="ToolBarStyle" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@color/loginToolbarTitle</item>
+        <item name="colorControlNormal">@color/loginToolbarTitle</item>
+    </style>
+
+    <style name="forgotToolbar" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@color/loginToolbarTitle</item>
+        <item name="colorControlNormal">@color/loginToolbarTitle</item>
+    </style>
+
+</resources>

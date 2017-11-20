@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2980b9</color>
+    <color name="colorPrimaryDark">#121212</color> <!--top color-->
+    <color name="colorAccent">#FF4081</color>
+    <color name="colortitle">#4553aa</color>
+    <color name="grayColor">#c2c2c2</color>
+    <color name="loginToolbar">#a0cc6f</color>
+    <color name="loginRectangle">#cdcdcd</color>
+    <color name="loginToolbarTitle">#7ba679</color>
+</resources>

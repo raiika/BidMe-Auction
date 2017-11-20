@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:background="@color/colorPrimary"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/nav_teks_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/nav_teks_saldo"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="23dp"
+        android:layout_toEndOf="@+id/nav_profile_image"
+        android:text=""
+        android:textColor="#ffffff"
+        android:textIsSelectable="false"
+        android:textSize="18dp" />
+
+    <ImageView
+        android:id="@+id/nav_profile_image"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/nav_teks_saldo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="23dp"
+        android:layout_toEndOf="@+id/nav_profile_image"
+        android:text="Rp 0"
+        android:textColor="#ffffff" />
+
+</RelativeLayout>

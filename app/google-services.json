@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1067905981175",
+    "firebase_url": "https://bidme-auction.firebaseio.com",
+    "project_id": "bidme-auction",
+    "storage_bucket": "bidme-auction.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067905981175:android:6cf0e7835fba51de",
+        "android_client_info": {
+          "package_name": "com.finalproject.bidmeauction"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067905981175-v93lik5nlnbq2bkc671r8fvnaf01g7q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1XzbJRqMACMmTTrFFl1VECYE6TFkMXh4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.finalproject.bidmeauction.BidActivity"
+    android:layout_alignParentBottom="true"
+    android:orientation="vertical">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="500"/>
+    <TextView
+        android:id="@+id/bid_username"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="username"
+        android:textAlignment="center" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_outline"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/bid_bid"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="100dp"
+            android:text="0"
+            android:textAlignment="center" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/countDown"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="100dp"
+        android:text=""
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/true_balance"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="100dp"
+        android:text=""
+        android:textAlignment="center" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1000"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/bid_teks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            android:text=""
+            android:padding="5dp"
+            android:background="@drawable/input_outline"
+            android:imeOptions="actionDone"/>
+
+        <Button
+            android:id="@+id/bid_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text=">" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/bid_quick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Quick Bid" />
+
+</LinearLayout>

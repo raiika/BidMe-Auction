@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Account Information">
+        <menu>
+            <item android:id="@+id/nav_account"
+                android:icon="@mipmap/ic_person_black_24dp"
+                android:title="My account"/>
+
+            <item android:id="@+id/nav_booked"
+                android:icon="@mipmap/ic_book_black_24dp"
+                android:title="My Booked Auction"/>
+
+            <item android:id="@+id/nav_history"
+                android:icon="@mipmap/ic_history_black_24dp"
+                android:title="History"/>
+        </menu>
+    </item>
+
+    <item android:id="@+id/nav_upcoming"
+        android:icon="@mipmap/ic_settings_black_24dp"
+        android:title="Upcoming Auction"/>
+
+    <item android:id="@+id/nav_setting"
+        android:icon="@mipmap/ic_settings_black_24dp"
+        android:title="Setting"/>
+
+    <item android:id="@+id/nav_add_admin"
+        android:icon="@mipmap/ic_settings_black_24dp"
+        android:title="Add Admin"
+        android:visible="false"/>
+
+    <item android:id="@+id/nav_logout"
+        android:icon="@mipmap/ic_power_settings_new_black_24dp"
+        android:title="Log out"/>
+</menu>

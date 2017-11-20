@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bluredbg"
+    android:orientation="vertical"
+    tools:context="com.finalproject.bidmeauction.ForgotActivity">
+
+
+    <!--Gimana cara ganti warna tulisan nama Bidme di toolbarnya itu ka ?-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:alpha=".70"
+        android:background="@color/cardview_light_background"
+        app:theme="@style/forgotToolbar" />
+
+    <TextView
+        android:id="@+id/rectangleBackground"
+        android:layout_width="280dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="100dp"
+        android:alpha=".70"
+        android:background="@drawable/rectangle_login"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Input Your Email Bellow"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@+id/rectangleBackground"
+        app:layout_constraintRight_toRightOf="@+id/rectangleBackground"
+        app:layout_constraintTop_toTopOf="@+id/rectangleBackground" />
+
+    <EditText
+        android:id="@+id/forgot_password"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/input_outline"
+        android:drawableLeft="@drawable/email_fill"
+        android:drawablePadding="10dp"
+        android:hint="your.email@provider.com"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@+id/rectangleBackground"
+        app:layout_constraintRight_toRightOf="@+id/rectangleBackground"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/forgotBtn"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/submit_button"
+        android:text="Request New Password"
+        android:textColor="#ffffff"
+        app:layout_constraintLeft_toLeftOf="@+id/rectangleBackground"
+        app:layout_constraintRight_toRightOf="@+id/rectangleBackground"
+        app:layout_constraintTop_toBottomOf="@+id/forgot_password" />
+
+</android.support.constraint.ConstraintLayout>

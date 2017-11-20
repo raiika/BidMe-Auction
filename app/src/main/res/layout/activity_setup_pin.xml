@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#14c15b"
+    tools:context="com.finalproject.bidmeauction.SetupPinActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:alpha="0.75"
+        android:background="@color/cardview_light_background"
+        app:theme="@style/ToolBarStyle" />
+
+    <TextView
+        android:id="@+id/squarepin"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:layout_marginTop="232dp"
+        android:background="#e1e1e1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/pin_number"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/input_square"
+        android:enabled="false"
+        android:gravity="center"
+        android:hint="Input Your PIN"
+        android:inputType="numberPassword"
+        android:padding="10px"
+        android:textColor="@drawable/black_disable"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/squarepin"
+        app:layout_constraintStart_toStartOf="@+id/squarepin"
+        app:layout_constraintTop_toTopOf="@+id/squarepin" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/pin_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/pin_icon" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/squarepin"
+        app:layout_constraintTop_toBottomOf="@+id/pin_number">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/pin1"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="#f8f8f8"
+                android:onClick="pressPinButton"
+                android:tag="1"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/pin2"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="#f8f8f8"
+                android:onClick="pressPinButton"
+                android:tag="2"
+                android:text="2" />
+
+            <Button
+                android:id="@+id/pin3"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="#f8f8f8"
+                android:onClick="pressPinButton"
+                android:tag="3"
+                android:text="3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/pin4"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="#f8f8f8"
+                android:onClick="pressPinButton"
+                android:tag="4"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/pin5"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="#f8f8f8"
+                android:onClick="pressPinButton"
+                android:tag="5"
+                android:text="5" />
+
+            <Button
+                android:id="@+id/pin6"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="#f8f8f8"
+                android:onClick="pressPinButton"
+                android:tag="6"
+                android:text="6" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/pin7"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="#f8f8f8"
+                android:onClick="pressPinButton"
+                android:tag="7"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/pin8"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="#f8f8f8"
+                android:onClick="pressPinButton"
+                android:tag="8"
+                android:text="8" />
+
+            <Button
+                android:id="@+id/pin9"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="#f8f8f8"
+                android:onClick="pressPinButton"
+                android:tag="9"
+                android:text="9" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/pinclear"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="#f8f8f8"
+                android:onClick="pressClearButton"
+                android:text="Clear" />
+
+            <Button
+                android:id="@+id/pin0"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="#f8f8f8"
+                android:onClick="pressPinButton"
+                android:tag="0"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/pindel"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="#f8f8f8"
+                android:onClick="pressDeleteButton"
+                android:text="Del" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!--Button
+        android:id="@+id/pin1"
+        android:layout_width="wrap_content"
+        android:layout_height="53dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:background="#f8f8f8"
+        android:text="1"
+        app:layout_constraintStart_toStartOf="@+id/squarepin"
+        app:layout_constraintTop_toBottomOf="@+id/pin_number" />
+
+    <Button
+        android:id="@+id/pin2"
+        android:layout_width="wrap_content"
+        android:layout_height="53dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:background="#f8f8f8"
+        android:text="2"
+        app:layout_constraintEnd_toStartOf="@+id/pin3"
+        app:layout_constraintStart_toEndOf="@+id/pin1"
+        app:layout_constraintTop_toBottomOf="@+id/pin_number" />
+
+    <Button
+        android:id="@+id/pin3"
+        android:layout_width="0dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="#f8f8f8"
+        android:text="3"
+        app:layout_constraintEnd_toEndOf="@+id/squarepin"
+        app:layout_constraintTop_toBottomOf="@+id/pin_number" /-->
+
+    <!-->
+
+    <Button
+        android:id="@+id/pin_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" /-->
+
+</android.support.constraint.ConstraintLayout>
