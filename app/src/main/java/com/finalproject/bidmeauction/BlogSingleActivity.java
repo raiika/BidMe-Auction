@@ -65,6 +65,7 @@ public class BlogSingleActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseBid;
     private DatabaseReference mDatabaseUser;
     private DatabaseReference mDatabaseLike;
+    private DatabaseReference mDatabaseLog;
     private FirebaseStorage mFirebaseStorage;
     private RecyclerView mRecyclerView;
     private String mPost_key = null;
@@ -89,6 +90,9 @@ public class BlogSingleActivity extends AppCompatActivity {
 
     private NestedScrollView mScrollView;
 
+    private ValueEventListener showItem;
+    private ValueEventListener refreshBlogKomenAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +115,7 @@ public class BlogSingleActivity extends AppCompatActivity {
         mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Likes");
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users");
         mDatabaseBook = FirebaseDatabase.getInstance().getReference().child("Book");
-        //mDatabaseTests = FirebaseDatabase.getInstance().getReference().child("Ping");
+        mDatabaseLog = FirebaseDatabase.getInstance().getReference().child("Log");
         mFirebaseStorage = FirebaseStorage.getInstance();
 
         mDatabase.keepSynced(true);
@@ -161,7 +165,7 @@ public class BlogSingleActivity extends AppCompatActivity {
             }
         });
 
-        mDatabaseKomen.addValueEventListener(new ValueEventListener() {
+        refreshBlogKomenAdapter = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mAdapter.notifyDataSetChanged();
@@ -171,14 +175,16 @@ public class BlogSingleActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        };
+
+        mDatabaseKomen.child(mPost_key).addValueEventListener(refreshBlogKomenAdapter);
 
         mDatabase.child(mPost_key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 Blog model = dataSnapshot.getValue(Blog.class);
-                if(model != null){
+                if (model != null) {
                     mBlogSingleTitle.setText(model.getTitle());
                     mBlogSingleDesc.setText(model.getDesc());
                     Picasso.with(BlogSingleActivity.this).load(model.getImage()).into(mBlogSingleImage);
@@ -192,7 +198,31 @@ public class BlogSingleActivity extends AppCompatActivity {
             }
         });
 
+        mDatabaseLog.child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mDatabaseUser.removeEventListener(showItem);
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        mDatabaseUser.removeEventListener(showItem);
+        super.onStop();
     }
 
     private void startKomenting() {
@@ -208,7 +238,7 @@ public class BlogSingleActivity extends AppCompatActivity {
 
             final DatabaseReference newPost = mDatabaseKomen.child(mPost_key).push();
 
-            mDatabaseUser.addValueEventListener(new ValueEventListener() {
+            mDatabaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -246,7 +276,7 @@ public class BlogSingleActivity extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.single_blog_menu, menu);
 
-        mDatabaseUser.addValueEventListener(new ValueEventListener() {
+        showItem = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -263,7 +293,9 @@ public class BlogSingleActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        };
+
+        mDatabaseUser.addValueEventListener(showItem);
 
         return super.onCreateOptionsMenu(menu);
     }

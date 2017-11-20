@@ -62,64 +62,17 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static SharedPreferences pref;
-    private static SharedPreferences.Editor editor;
     public TextView noData;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
     SwipeRefreshLayout mySwipeRefreshLayout;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
     private RecyclerView mRecyclerView;
     private DatabaseReference mDatabase;
     private DatabaseReference mDatabaseUsers;
     private DatabaseReference mDatabaseTime;
     private DatabaseReference mDatabaseNotification;
-    Thread thread = new Thread() {
-        @Override
-        public void run() {
-
-
-            ValueEventListener notificationListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    String settingNotification = pref.getString("notification", null);
-                    if (!(settingNotification == null || settingNotification.equals("disable"))) {
-                        Log.v("Raiika", String.valueOf(settingNotification));
-                        if (dataSnapshot.child("abc") != null) {
-                            if (dataSnapshot.child("abc").child("title").getValue(String.class) != null && dataSnapshot.child("abc").child("desc").getValue(String.class) != null) {
-
-                                NotificationCompat.Builder mBuilder =
-                                        new NotificationCompat.Builder(MainActivity.this)
-                                                .setSmallIcon(R.mipmap.ic_launcher)
-                                                .setContentTitle(dataSnapshot.child("abc").child("title").getValue(String.class))
-                                                .setContentText(dataSnapshot.child("abc").child("desc").getValue(String.class));
-
-                                int mNotificationId = 001;
-                                NotificationManager mNotifyMgr =
-                                        (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                                mNotifyMgr.notify(mNotificationId, mBuilder.build());
-
-                            }
-
-                        }
-                    } else {
-
-                        Log.v("Raiika", String.valueOf(settingNotification));
-                    }
-
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            };
-            mDatabaseNotification.removeEventListener(notificationListener);
-            mDatabaseNotification.addValueEventListener(notificationListener);
-
-        }
-    };
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     //Navigation Menu
@@ -136,7 +89,55 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private MaterialSearchView searchView;
     private int trueBalance;
     private long back_pressed = 0;
-    private boolean letsgo = true;
+    private boolean disableOnce;
+    Thread thread = new Thread() {
+        @Override
+        public void run() {
+
+            disableOnce = false;
+            ValueEventListener notificationListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (disableOnce) {
+                        String settingNotification = pref.getString("notification", null);
+                        if (!(settingNotification == null || settingNotification.equals("disable"))) {
+                            Log.v("Raiika", String.valueOf(settingNotification));
+                            if (dataSnapshot.child("abc") != null) {
+                                if (dataSnapshot.child("abc").child("title").getValue(String.class) != null && dataSnapshot.child("abc").child("desc").getValue(String.class) != null) {
+
+                                    NotificationCompat.Builder mBuilder =
+                                            new NotificationCompat.Builder(MainActivity.this)
+                                                    .setSmallIcon(R.mipmap.ic_launcher)
+                                                    .setContentTitle(dataSnapshot.child("abc").child("title").getValue(String.class))
+                                                    .setContentText(dataSnapshot.child("abc").child("desc").getValue(String.class));
+
+                                    int mNotificationId = 001;
+                                    NotificationManager mNotifyMgr =
+                                            (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                    mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+                                }
+
+                            }
+                        } else {
+
+                            Log.v("Raiika", String.valueOf(settingNotification));
+                        }
+                    }
+                    disableOnce = true;
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+            mDatabaseNotification.removeEventListener(notificationListener);
+            mDatabaseNotification.addValueEventListener(notificationListener);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,6 +231,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mRecyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                     @Override
                     public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                        Log.v("RAIIKA", "KEPRINT GA YA ?");
                         if(mAdapter.getItemCount() <1){
                             noData.setVisibility(View.VISIBLE);
                         }
@@ -285,8 +287,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             if(userModel.getType() != null) {
                                 if (userModel.getType().equals("admin")) {
                                     mNavTeksName.setText("[Admin] " + userModel.getName());
+                                    mDatabaseNotification.child("abc").child("title").setValue("si " + userModel.getName() + " login");
+                                    mDatabaseNotification.child("abc").child("desc").setValue("Sebagai Admin");
                                 } else {
                                     mNavTeksName.setText(userModel.getName());
+                                    mDatabaseNotification.child("abc").child("title").setValue("si " + userModel.getName() + " login");
+                                    mDatabaseNotification.child("abc").child("desc").setValue("Sebagai User");
                                 }
                             }
                             Picasso.with(getApplicationContext()).load(userModel.getImage()).transform(new additionalMethod.CircleTransform()).into(mNavProfileImage);
@@ -317,7 +323,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         checkUserExist();
 
-        thread.start();
+
+        startService(new Intent(MainActivity.this, BidMeNotificationService.class));
+
+        //thread.start();
     }
 
     private void notificationPermission() {
@@ -334,10 +343,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             editor.putString("notification", "enable");
-
                             editor.commit();
-
-                            thread.run();
                         }
                     });
             builder.setNegativeButton("Nope", new DialogInterface.OnClickListener() {
@@ -352,7 +358,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             AlertDialog dialog = builder.create();
             dialog.show();
         }
-
     }
 
     public void checkBidBalance() {
@@ -603,12 +608,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             Intent postIntent = new Intent(MainActivity.this, PostActivity.class);
             startActivity(postIntent);
-
-        }
-
-        if (item.getItemId() == R.id.action_current_time){
-
-            letsgo = false;
 
         }
 

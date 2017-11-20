@@ -64,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ProgressDialog mProgress;
     private Uri mImageUri = null;
     private User userModel;
+    private String userID;
 
 
     @Override
@@ -90,7 +91,13 @@ public class ProfileActivity extends AppCompatActivity {
         mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
         mDatabaseVoucher = FirebaseDatabase.getInstance().getReference().child("Voucher");
 
-        mDatabaseUsers.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        if (getIntent().getStringExtra("userID") == null) {
+            userID = mAuth.getCurrentUser().getUid();
+        } else {
+            userID = getIntent().getStringExtra("userID");
+        }
+
+        mDatabaseUsers.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userModel = dataSnapshot.getValue(User.class);
@@ -110,49 +117,77 @@ public class ProfileActivity extends AppCompatActivity {
         mProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeProfileImage();
+                if (userID.equals(mAuth.getCurrentUser().getUid())) {
+                    changeProfileImage();
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Not your profile information", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         mProfileUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeName();
+                if (userID.equals(mAuth.getCurrentUser().getUid())) {
+                    changeName();
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Not your profile information", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         mProfileAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeAddress();
+                if (userID.equals(mAuth.getCurrentUser().getUid())) {
+                    changeAddress();
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Not your profile information", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         mProfilePhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changePhone();
+                if (userID.equals(mAuth.getCurrentUser().getUid())) {
+                    changePhone();
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Not your profile information", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         mChangePasswordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changePassword();
+                if (userID.equals(mAuth.getCurrentUser().getUid())) {
+                    changePassword();
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Not your profile information", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         mTopUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                topUp();
+                if (userID.equals(mAuth.getCurrentUser().getUid())) {
+                    topUp();
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Not your profile information", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         mAddTopUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addTopUp();
+                if (userID.equals(mAuth.getCurrentUser().getUid())) {
+                    addTopUp();
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Not your profile information", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -218,7 +253,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                             if(dataSnapshot.hasChild(mTeksVoucher.getText().toString())){
                                 int add_balance = dataSnapshot.child(mTeksVoucher.getText().toString()).getValue(Integer.class);
-                                mDatabaseUsers.child(mAuth.getCurrentUser().getUid()).child("balance").setValue(userModel.getBalance()+add_balance);
+                                mDatabaseUsers.child(userID).child("balance").setValue(userModel.getBalance() + add_balance);
                                 mDatabaseVoucher.child(mTeksVoucher.getText().toString()).removeValue();
                             }else{
                                 Toast.makeText(ProfileActivity.this, "Invalid Voucher", Toast.LENGTH_SHORT).show();
@@ -242,7 +277,11 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void showUserProfile(User inUserModel) {
-        mProfileEmail.setText(mAuth.getCurrentUser().getEmail());
+        if (getIntent().getStringExtra("userID") == null) {
+            mProfileEmail.setText(mAuth.getCurrentUser().getEmail().substring(0, 3));
+        } else {
+            mProfileEmail.setText("[privacy]");
+        }
         if(inUserModel.getName()!=null){
             mProfileUsername.setText(inUserModel.getName());
         }
@@ -284,7 +323,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String username = mTeksUser.getText().toString();
-                        mDatabaseUsers.child(mAuth.getCurrentUser().getUid()).child("name").setValue(username);
+                        mDatabaseUsers.child(userID).child("name").setValue(username);
                         Toast.makeText(ProfileActivity.this,"Success changing your name", Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -307,7 +346,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String address = mTeksUser.getText().toString();
-                        mDatabaseUsers.child(mAuth.getCurrentUser().getUid()).child("address").setValue(address);
+                        mDatabaseUsers.child(userID).child("address").setValue(address);
                         Toast.makeText(ProfileActivity.this,"Success changing your address", Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -330,7 +369,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String address = mTeksUser.getText().toString();
-                        mDatabaseUsers.child(mAuth.getCurrentUser().getUid()).child("phone").setValue(address);
+                        mDatabaseUsers.child(userID).child("phone").setValue(address);
                         Toast.makeText(ProfileActivity.this,"Success changing your phone number", Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -444,7 +483,7 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                         mProfileImage.setImageURI(mImageUri);
-                        final DatabaseReference current_user_db = mDatabaseUsers.child(mAuth.getCurrentUser().getUid());
+                        final DatabaseReference current_user_db = mDatabaseUsers.child(userID);
 
                         current_user_db.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override

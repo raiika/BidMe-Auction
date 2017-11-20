@@ -54,7 +54,9 @@ public class PinActivity extends AppCompatActivity {
         pinNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                if (count >= 6) {
+                    checkPin(userModel);
+                }
             }
 
             @Override
@@ -135,7 +137,9 @@ public class PinActivity extends AppCompatActivity {
     }
 
     public void pressDeleteButton(View v) {
-        pinNumber.setText(pinNumber.getText().delete(pinNumber.getText().length() - 1, pinNumber.getText().length()));
+        if (pinNumber.getText().length() > 0) {
+            pinNumber.setText(pinNumber.getText().delete(pinNumber.getText().length() - 1, pinNumber.getText().length()));
+        }
     }
 
     @Override

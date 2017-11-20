@@ -4,34 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.finalproject.bidmeauction.BidActivity"
     android:layout_alignParentBottom="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.finalproject.bidmeauction.BidActivity">
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="500"/>
+
     <TextView
         android:id="@+id/bid_username"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
+        android:onClick="goToUserProfile"
         android:text="username"
         android:textAlignment="center" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/input_outline"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        android:background="@drawable/input_outline">
 
         <TextView
             android:id="@+id/bid_bid"
             android:layout_width="match_parent"
-            android:gravity="center"
             android:layout_height="100dp"
+            android:gravity="center"
             android:text="0"
             android:textAlignment="center" />
 
@@ -40,17 +42,25 @@
     <TextView
         android:id="@+id/countDown"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="100dp"
+        android:gravity="center"
         android:text=""
         android:textAlignment="center" />
 
     <TextView
         android:id="@+id/true_balance"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="100dp"
+        android:gravity="center"
         android:text=""
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/bid_admin_btn"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:text="Confirm and delete"
         android:textAlignment="center" />
 
     <Space
@@ -68,17 +78,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:inputType="numberDecimal"
-            android:text=""
-            android:padding="5dp"
             android:background="@drawable/input_outline"
-            android:imeOptions="actionDone"/>
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
+            android:padding="5dp"
+            android:text="" />
 
         <Button
             android:id="@+id/bid_btn"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:onClick="performBid"
             android:text=">" />
 
     </LinearLayout>
@@ -89,6 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:onClick="performQuickBid"
         android:text="Quick Bid" />
 
 </LinearLayout>

@@ -103,7 +103,9 @@ public class SetupPinActivity extends AppCompatActivity {
     }
 
     public void pressDeleteButton(View v) {
-        pinNumber.setText(pinNumber.getText().delete(pinNumber.getText().length() - 1, pinNumber.getText().length()));
+        if (pinNumber.getText().length() > 0) {
+            pinNumber.setText(pinNumber.getText().delete(pinNumber.getText().length() - 1, pinNumber.getText().length()));
+        }
     }
 
     @Override

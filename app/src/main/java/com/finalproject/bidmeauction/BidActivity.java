@@ -54,6 +54,7 @@ public class BidActivity extends AppCompatActivity {
     private EditText mBidTeks;
     private Button mBidBtn;
     private Button mBidQuick;
+    private long realTimeServer;
     private final Runnable run = new Runnable() {
         @Override
         public void run() {
@@ -64,8 +65,9 @@ public class BidActivity extends AppCompatActivity {
             mDatabaseTime.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    realTimeServer = dataSnapshot.getValue(long.class);
 
-                    if (new Date(dataSnapshot.getValue(long.class)).before(new Date(modelAuction.getTutup())) || modelUser.getType().equals("admin")) {
+                    if (new Date(realTimeServer).before(new Date(modelAuction.getTutup())) || isAdmin()) {
 
                         mCountDown.setText(String.valueOf((int) (modelAuction.getTutup() - dataSnapshot.getValue(long.class)) / 1000) + " Seconds left");
 
@@ -163,14 +165,6 @@ public class BidActivity extends AppCompatActivity {
             }
         });
 
-        mBidQuick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                performQuickBid();
-            }
-
-        });
-
         mBidTeks.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -179,13 +173,6 @@ public class BidActivity extends AppCompatActivity {
                     return true;
                 }
                 return false;
-            }
-        });
-
-        mBidBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                performBid();
             }
         });
 
@@ -279,7 +266,7 @@ public class BidActivity extends AppCompatActivity {
     }
 
 
-    private void performQuickBid() {
+    public void performQuickBid(View v) {
         bid_total = bid_total + (bid_total / 20);
 
         if(trueBalance >= bid_total) {
@@ -300,7 +287,7 @@ public class BidActivity extends AppCompatActivity {
         }
     }
 
-    private void performBid() {
+    public void performBid(View v) {
         String bidTeks = mBidTeks.getText().toString().replace(",","");
         if (bidTeks.equals("")) {
             Toast.makeText(BidActivity.this, "Input your amount", Toast.LENGTH_SHORT).show();
@@ -363,9 +350,24 @@ public class BidActivity extends AppCompatActivity {
         }
     }
 
+    public void goToUserProfile(View v) {
+
+        if (new Date(realTimeServer).after(new Date(modelAuction.getTutup())) && isAdmin()) {
+            Intent profileIntent = new Intent(BidActivity.this, ProfileActivity.class);
+            profileIntent.putExtra("userID", modelAuction.getBiduid());
+            startActivity(profileIntent);
+        }
+
+    }
+
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    public boolean isAdmin() {
+        return modelUser.getType().equals("admin");
+
     }
 
     class MoneyValueFilter extends DigitsKeyListener {
